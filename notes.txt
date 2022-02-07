@@ -1,0 +1,10 @@
+docker create -i -t --volume `pwd`:/workspace -w /workspace --name "rails_devcontainer" ruby:3.1
+docker start rails_devcontainer
+docker exec -i -t -w /workspace rails_devcontainer /bin/bash -l
+
+bundle exec rails server --binding 0.0.0.0
+
+
+puma.db: bind "tcp://#{ENV.fetch('INTERFACE', '127.0.0.1')}:#{ENV.fetch('PORT', '3000')}"
+
+docker compose exec app /bin/bash -l
