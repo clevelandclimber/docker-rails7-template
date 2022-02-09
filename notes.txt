@@ -8,3 +8,9 @@ bundle exec rails server --binding 0.0.0.0
 puma.db: bind "tcp://#{ENV.fetch('INTERFACE', '127.0.0.1')}:#{ENV.fetch('PORT', '3000')}"
 
 docker compose exec app /bin/bash -l
+
+alias be="bundle exec"
+docker compose up -d --build
+docker compose down
+
+
