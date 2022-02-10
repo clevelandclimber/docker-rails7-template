@@ -1,19 +1,17 @@
-docker create -i -t --volume `pwd`:/workspace -w /workspace --name "rails_devcontainer" ruby:3.1
-docker start rails_devcontainer
-docker exec -i -t -w /workspace rails_devcontainer /bin/bash -l
-
 bundle exec rails server --binding 0.0.0.0
 
+# change the puma.db file so we can set the interface to 0.0.0.0 (i.e. rails server --binding 0.0.0.0)
+puma.db:
+  bind "tcp://#{ENV.fetch('INTERFACE', '127.0.0.1')}:#{ENV.fetch('PORT', '3000')}"
+docker-compose.yml:
+  INTERFACE: "0.0.0.0"
 
-puma.db: bind "tcp://#{ENV.fetch('INTERFACE', '127.0.0.1')}:#{ENV.fetch('PORT', '3000')}"
 
-docker compose exec app /bin/bash -l
+# overrite rails binstubs to something more robust
+bundle binstubs --all --force
 
-alias be="bundle exec"
+# add spring to binstubs
+spring binstub --all
 
-docker compose up -d --build
-docker compose up -d
-docker compose exec app /bin/bash -l
-docker compose down
-
-docker-compose -f .devcontainer/docker-compose.yml -p project_name up
+# to put binstubs in a different directory (warning: spring does not follow this convention)
+bundle config set --local bin .bundle/bin
