@@ -15,3 +15,6 @@ spring binstub --all
 
 # to put binstubs in a different directory (warning: spring does not follow this convention)
 bundle config set --local bin .bundle/bin
+
+# to change from sqlite3 to postresql
+rails db:system:change --to=postgresql
