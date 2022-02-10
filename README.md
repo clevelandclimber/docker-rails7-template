@@ -12,12 +12,12 @@ You'll also need the `OLD_FOO_URL` that you're copying from. In this case that's
 1. create the empty repository `NEW_BAR` on GitHub
 
 2. on your local machine, clone the old repository
-    ```bash
-    $ git clone OLD_FOO_URL NEW_BAR
+    ```
+    git clone OLD_FOO_URL NEW_BAR
     ```
 3. cd into your local repo
     ```
-    $ cd NEW_BAR
+    cd NEW_BAR
     ```
 4. update the `.git/config` file changing the remote url to `NEW_BAR_URL`
     ```
@@ -27,9 +27,9 @@ You'll also need the `OLD_FOO_URL` that you're copying from. In this case that's
     ```
 5. Optionally add your original repo as an upstream source:
     ```
-    $ git remote add upstream OLD_FOO_URL
+    git remote add upstream OLD_FOO_URL
     ```
 6. Push your updated repository up to GitHub:
     ```
-    $ git push -u origin master
+    git push -u origin master
     ```
