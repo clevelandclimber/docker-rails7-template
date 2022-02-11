@@ -1,6 +1,6 @@
 # README
 
-A skeletal docker container with Ruby 3.1, Rail 7. This container is a monolith. Use the main branch for Sqlite3 us the postgresql branch for PostgreSQL.
+A skeletal development docker container with Ruby 3.1, Rail 7. This container is a monolith. Use the 'sqlite3' branch for Sqlite3; use the 'postgresql' branch for PostgreSQL.
 > This work is based on Avdi Grimm's work at [Graceful Dev](https://graceful.dev).
 
 # How to copy this repository (if you're not going to fork it)
@@ -44,9 +44,23 @@ You should create an `.env` file but don't check it into git. At the very least 
   export COMPOSE_PROJECT_NAME=dockertemplate
   ```
 
-## Change the database to PostgreSQL
+## How to Use
 
-Add the following then rebundle.
+  Start the container:
+  ```
+  docker compose up -d
+  ```
+
+  Get a bash shell in the container:
+  ```
+  script/dev-shell
+  ```
+
+  Change your profile by editing `.devcontainer/profile.sh`
+
+## To change the database to PostgreSQL
+
+In the container, run the following then rebundle.
 
   ```
   rails db:system:change --to=postgresql
