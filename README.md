@@ -44,7 +44,7 @@ You should create an `.env` file but don't check it into git. At the very least 
   export COMPOSE_PROJECT_NAME=dockertemplate
   ```
 
-## Change the database to Postgresql
+## Change the database to PostgreSQL
 
 Add the following then rebundle.
 
