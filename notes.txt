@@ -7,14 +7,20 @@ docker-compose.yml:
   INTERFACE: "0.0.0.0"
 
 
-# overrite rails binstubs to something more robust
-bundle binstubs --all --force
-
-# add spring to binstubs
-spring binstub --all
-
 # to put binstubs in a different directory (warning: spring does not follow this convention)
 bundle config set --local bin .bundle/bin
 
-# to change from sqlite3 to postresql
+# to change from sqlite3 to postresql (there's more to do than just this!)
 rails db:system:change --to=postgresql
+
+# to save some credentials
+EDITOR=vim bin/rails credentials:edit --environment development
+
+# get into the Postgres container
+docker exec -ti dockertemplate-db-1 /bin/bash -l
+psql --username=developer
+\du
+
+
+rails db:create
+rails db:migrate

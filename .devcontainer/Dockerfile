@@ -1,8 +1,9 @@
 FROM ruby:3.1
 RUN apt-get update \
-  && apt-get install -y vim \
-  && rm -rf /var/lib/apt/lists/*
-
+  && apt-get install -y vim postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+# you can't use an environment variable for the root password, but occasionally I need to su - feel free to change it here.
+RUN echo "root:pw" | chpasswd
 COPY load-profile.sh /etc/profile.d/
 
 ARG USERNAME=developer
